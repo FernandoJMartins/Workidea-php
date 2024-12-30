@@ -6,15 +6,13 @@ function basePath($path = '') {
 
 
 function loadView($path) {
-    $viewPath = basePath("views/$path.view.php");
-
+    $viewPath = basePath("views/{$path}.view.php");
     if (file_exists($viewPath)){
         require $viewPath;
     }
     else{
         echo "View {$path} not found";
     }
-
 }
 
 function loadPartials($path) {
@@ -26,8 +24,20 @@ function loadPartials($path) {
     else{
         echo "Partial {$path} not found";
     }
-
 }
+
+function inspect($value){
+    echo "<pre>";
+    var_dump($value);
+    echo "</pre>";
+}
+
+function inspectAndDie($value){
+    echo "<pre>";
+    die(var_dump($value));
+    echo "</pre>";
+}
+
 
 ?>
 
