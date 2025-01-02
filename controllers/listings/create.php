@@ -1,2 +1,2 @@
 <?php
-echo "listings";
+echo "create";
