@@ -1,0 +1,16 @@
+{
+    "name": "fernandojmartins/workidea-php",
+    "description": "Job Listing Application",
+    "authors": [
+        {
+            "name": "Fernando J. Martins",
+            "email": "julio8martins@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Framework\\": "Framework/",
+            "App\\": "App/"
+        }
+    }
+}

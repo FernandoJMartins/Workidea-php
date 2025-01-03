@@ -1,11 +1,10 @@
 <?php
 
+namespace Framework;
 
 class Router {
 
     protected $routes = [];
-
-
     /**
      * add a new route
      *

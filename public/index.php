@@ -1,17 +1,10 @@
 <?php
-
+require __DIR__ . "/../vendor/autoload.php";
 require "../helpers.php";
 
-spl_autoload_register(function($class) {
-    $path = basePath("Framework/" . $class . '.php');
-
-    if (file_exists($path)){
-        require $path;
-    }
-});
+use Framework\Router;
 
 $config = require basePath('config/db.php');
-$db = new Database($config);
 
 //Instantiate the Router
 $router = new Router();
