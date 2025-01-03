@@ -5,9 +5,10 @@ function basePath($path = '') {
 }
 
 
-function loadView($path) {
+function loadView($path, $data = []) {
     $viewPath = basePath("views/{$path}.view.php");
     if (file_exists($viewPath)){
+        extract($data);
         require $viewPath;
     }
     else{
@@ -38,6 +39,10 @@ function inspectAndDie($value){
     echo "</pre>";
 }
 
+
+function formatSalary($salary) {
+    return '$' . number_format(floatval($salary));
+}
 
 ?>
 
