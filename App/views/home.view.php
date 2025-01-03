@@ -26,8 +26,7 @@
                   >
                 </li>
                 <li class="mb-2">
-                  <strong>Tags:</strong> <span><?= $listing->tags ?></span>,
-                  <span>Coding</span>
+                  <strong>Tags:</strong> <span class="text-base"><?= $listing->tags ?></span>
                 </li>
               </ul>
               <a href="/public/listing/?id=<?= $listing->id ?>"
