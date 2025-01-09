@@ -136,4 +136,29 @@ class ListingController {
         header('Location: /public/listings/');
         exit;
     }
+
+
+        /**
+     * Edit a Listing form
+     *
+     * @return void
+     */
+    public function edit($params) {
+        $id = $params['id'] ?? '';
+        $params = [
+            "id" => $id
+        ];
+        
+        $listing = $this->db -> query('SELECT * FROM listings where id = :id', $params) -> fetch();
+        
+        //Check if $listing exists
+        if (!$listing){
+            ErrorController::notFound('Listing not found');
+            return;
+        }
+
+        loadView("listings/edit", [
+            'listing' => $listing
+        ]);
+    }
 }
