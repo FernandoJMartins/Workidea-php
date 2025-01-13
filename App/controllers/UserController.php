@@ -59,9 +59,33 @@ class UserController {
                 ]);
                 exit;
         }
-        else {
+        //Check if email exists
+        $params = [
+            'email' => $email
+        ];
+        $user = $this-> db -> query('Select * from users where email = :email', $params) -> fetch();
 
+        if ($user){
+            $errors['email'] = 'That email already exists';
+            loadView('users/create', [
+                'errors' => $errors
+            ]);
+        exit;
         }
+
+        $params = [
+            'name' => $name,
+            'email' => $email,
+            'city' => $city,
+            'state' => $state,
+            'pwd' => password_hash($pwd, PASSWORD_DEFAULT)
+        ];
+        
+        $this -> db -> query('INSERT INTO users (name, email, city, state, password) values 
+        (:name, :email, :city, :state, :pwd)', $params);
+    
+        header('Location: /public/');
+        exit;
     }
 
 
