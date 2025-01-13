@@ -16,10 +16,11 @@ function loadView($path, $data = []) {
     }
 }
 
-function loadPartials($path) {
+function loadPartials($path, $data = []) {
     $partialPath = basePath("App/views/partials/{$path}.php");
 
     if (file_exists($partialPath)){
+        extract($data);
         require $partialPath;
     }
     else{
