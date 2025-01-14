@@ -13,3 +13,4 @@ $router -> get('/public/auth/register/', 'UserController@create');
 $router -> get('/public/auth/login/', 'UserController@login');
 
 $router -> post('/public/auth/register/', 'UserController@store');
+$router -> post('/public/auth/logout/', 'UserController@logout');
