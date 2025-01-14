@@ -97,8 +97,6 @@ class UserController {
             'state' => $state
         ]);
 
-        inspectAndDie(Session::get('user'));
-
         header('Location: /public/');
         exit;
     }

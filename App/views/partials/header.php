@@ -4,13 +4,31 @@
           <a href="/public/">Workidea</a>
         </h1>
         <nav class="space-x-4">
-          <a href="/public/auth/login/" class="text-white hover:underline">Login</a>
-          <a href="/public/auth/register/" class="text-white hover:underline">Register</a>
-          <a
+          <?php
+
+use Framework\Session;
+
+ if (Session::has('user')) : ?>
+            <div class="flex justify-between items-center gap-4">
+            
+            <div>
+              Welcome, <?= Session::get('user')['name'] ?>
+            </div>
+            
+            <form>
+              <button type="submit" class="text-white inline hover:underline">Logout </button>
+            </form>
+            <a
             href="/public/listings/create/"
             class="bg-yellow-500 hover:bg-yellow-600 text-black px-4 py-2 rounded hover:shadow-md transition duration-300"
             ><i class="fa fa-edit"></i> Post a Job</a
           >
+            </div>
+
+          <?php else : ?>
+            <a href="/public/auth/login/" class="text-white hover:underline">Login</a>
+            <a href="/public/auth/register/" class="text-white hover:underline">Register</a>
+          <?php endif ; ?>
         </nav>
       </div>
     </header>
