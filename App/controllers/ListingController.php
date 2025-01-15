@@ -111,6 +111,8 @@ class ListingController {
 
             $query = "INSERT INTO listings ({$fields}) VALUES ({$values})";
             $this -> db -> query($query, $newListingData);
+
+            Session::setFlashMsg('success_message', 'Listing created successfully');
             
             header('Location: /public/listings/');
             exit;
@@ -133,7 +135,7 @@ class ListingController {
 
         //authorization
         if(!Authorization::isOwner($listing->user_id)){
-            $_SESSION['error_message'] =  'You are not allowed to delete this listing';
+            Session::setFlashMsg('error_message', 'You are not allowed to delete this listing');
             header('Location: /public/listings/' . $listing->id);
             exit;
         }
@@ -142,9 +144,7 @@ class ListingController {
 
         
         $this -> db -> query('DELETE FROM listings WHERE id = :id', $params);
-        
-        $_SESSION['success_message'] = 'Listing deleted';
-        
+        Session::setFlashMsg('success_message', 'Listing deleted');
         header('Location: /public/listings/');
         exit;
     }
@@ -168,6 +168,13 @@ class ListingController {
         if (!$listing){
             ErrorController::notFound('Listing not found');
             return;
+        }
+
+        //authorization
+        if(!Authorization::isOwner($listing->user_id)){
+            Session::setFlashMsg('error_message', 'You are not allowed to update this listing');
+            header('Location: /public/listings/' . $listing->id);
+            exit;
         }
 
         loadView("listings/edit", [
@@ -195,6 +202,15 @@ class ListingController {
             ErrorController::notFound('Listing not found');
             return;
         }
+
+        //authorization
+        if(!Authorization::isOwner($listing->user_id)){
+            Session::setFlashMsg('error_message', 'You are not allowed to update this listing');
+            header('Location: /public/listings/' . $listing->id);
+            exit;
+        }
+
+
 
         $allowedFields = ['title','requirements','salary','description','benefits',
         'company','address','city','state','phone','email'
@@ -238,7 +254,8 @@ class ListingController {
             $values['id'] = $id;
             $this -> db -> query ($q, $values);
 
-            $_SESSION['success_message'] = 'Listing Updated';
+            Session::setFlashMsg('success_message', 'Listing Updated');
+            
             header('Location: /public/listings/' . $id);
             exit;
         }
