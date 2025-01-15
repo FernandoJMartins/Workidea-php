@@ -3,7 +3,10 @@ $router -> get ('/public/', 'HomeController@index');
 $router -> get ('/public/listings/', 'ListingController@index');
 $router -> get ('/public/listings/create/', 'ListingController@create', ['auth']);
 $router -> get ('/public/listings/edit/{id}', 'ListingController@edit', ['auth']);
+$router -> get ('/public/listings/search/', 'ListingController@search');
 $router -> get ('/public/listings/{id}', 'ListingController@show');
+
+
 
 $router -> post ('/public/listings/', 'ListingController@store', ['auth']);
 $router -> put ('/public/listings/{id}', 'ListingController@update', ['auth']);
